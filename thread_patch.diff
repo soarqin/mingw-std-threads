@@ -1,0 +1,73 @@
+diff -ur origin/condition_variable mod/condition_variable
+--- origin/condition_variable	2016-07-11 20:56:00.000000000 +0800
++++ mod/condition_variable	2016-08-12 16:35:57.149617000 +0800
+@@ -44,7 +44,9 @@
+ #include <bits/shared_ptr.h>
+ #include <bits/cxxabi_forced.h>
+ 
+-#if defined(_GLIBCXX_HAS_GTHREADS) && defined(_GLIBCXX_USE_C99_STDINT_TR1)
++#if defined(_GLIBCXX_USE_C99_STDINT_TR1)
++
++#if defined(_GLIBCXX_HAS_GTHREADS)
+ 
+ namespace std _GLIBCXX_VISIBILITY(default)
+ {
+@@ -306,7 +308,13 @@
+ _GLIBCXX_END_NAMESPACE_VERSION
+ } // namespace
+ 
+-#endif // _GLIBCXX_HAS_GTHREADS && _GLIBCXX_USE_C99_STDINT_TR1
++#else
++
++#include <mingw.condition_variable.h>
++
++#endif // _GLIBCXX_HAS_GTHREADS
++
++#endif // _GLIBCXX_USE_C99_STDINT_TR1
+ 
+ #endif // C++11
+ 
+diff -ur origin/mutex mod/mutex
+--- origin/mutex	2016-07-11 20:56:01.000000000 +0800
++++ mod/mutex	2016-08-12 16:36:24.430220400 +0800
+@@ -631,6 +631,11 @@
+   // @} group mutexes
+ _GLIBCXX_END_NAMESPACE_VERSION
+ } // namespace
++
++#if !defined(_GLIBCXX_HAS_GTHREADS)
++#include <mingw.mutex.h>
++#endif
++
+ #endif // _GLIBCXX_USE_C99_STDINT_TR1
+ 
+ #endif // C++11
+diff -ur origin/thread mod/thread
+--- origin/thread	2016-07-11 20:56:01.000000000 +0800
++++ mod/thread	2016-08-12 16:33:30.535546300 +0800
+@@ -43,7 +43,9 @@
+ #include <bits/functional_hash.h>
+ #include <bits/gthr.h>
+ 
+-#if defined(_GLIBCXX_HAS_GTHREADS) && defined(_GLIBCXX_USE_C99_STDINT_TR1)
++#if defined(_GLIBCXX_USE_C99_STDINT_TR1)
++
++#if defined(_GLIBCXX_HAS_GTHREADS)
+ 
+ namespace std _GLIBCXX_VISIBILITY(default)
+ {
+@@ -352,7 +354,13 @@
+ 
+ } // namespace
+ 
+-#endif // _GLIBCXX_HAS_GTHREADS && _GLIBCXX_USE_C99_STDINT_TR1
++#else
++
++#include <mingw.thread.h>
++
++#endif // _GLIBCXX_HAS_GTHREADS
++
++#endif // _GLIBCXX_USE_C99_STDINT_TR1
+ 
+ #endif // C++11
+ 
