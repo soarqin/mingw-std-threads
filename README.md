@@ -13,15 +13,16 @@ with Windows XP.
 Usage
 =====
 
-This is a header-only library. To use, just include the corresponding mingw.xxx.h file, where
-xxx would be the name of the standard header that you would normally include.
-For additional mutex helper classes, such as std::scoped_guard or std::unique_lock, you need to
-include &lt;mutex&gt; before including mingw.mutex.h
+There are 2 ways to use:
+1. Just include the corresponding mingw.xxx.h file, where xxx would be the name of the standard header that
+you would normally include. For additional mutex helper classes, such as std::scoped_guard or std::unique_lock,
+you need to include &lt;mutex&gt; before including mingw.mutex.h
+2. Copy corresponding mingw.xxx.h files to C++ header folder and apply thread_patch.diff to 3 files
 
 Compatibility
 =============
 
-This code has been tested to work with MinGW-w64 5.3.0, but should work with any other MinGW version
+This code has been tested to work with MinGW-w64 5.4.0/6.1.0, but should work with any other MinGW version
 that has the std threading classes missing, has C++11 support for lambda functions, variadic
 templates, and has working mutex helper classes in &lt;mutex&gt;.  
 
